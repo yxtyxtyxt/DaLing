@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>商品列表</title>
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/l-top.css" />
+		<link rel="stylesheet" href="css/list.css" />
+		<link rel="stylesheet" href="css/bottom.css" />
+		<script src="js/jquery-1.11.3.js"></script>
+		<script src="js/list.js"></script>
+	</head>
+	<body>
+		<!--top-->
+		<div class="_top"></div>
+		<script>
+			$("._top").load("html/l-top.html");
+		</script>		
+			
+		<!--search-->
+		<div id="da-search">
+			<div class="search-link">
+				<ul>
+					<li>
+						<a href="###">
+							<span class="ico-home"></span>
+						</a>
+						<span class="icon-to"></span>
+					</li>
+					<li>
+						<a class="sort" href="#">
+							<span class="sort-name">尖货女装</span>
+							<span class="ico-sort-ar">
+								<span class="up"></span>
+								<span class="down"></span>	
+							</span>
+						</a>
+						<span class="icon-to"></span>
+					</li>
+					<li>
+						<div class="sort">
+							<input class="search-input" type="text">
+							<button class="ico-search" type="button"></button>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!--搜索-->
+			<div class="condition">
+				<ul>
+					<li>
+						<dl>
+							<dt>分类：</dt>
+							<dd class="single-select">
+								<div class="select-inner">
+									<!--动态插入-->
+								</div>
+							</dd>
+						</dl>
+						<div class="option">
+							<a class="sort-more" href="javascript:;" style="visibility: visible;">
+								<span class="ico-r-4-7"></span>
+								<span class="text-more">更多</span>
+							</a>
+						</div>
+					</li>
+					<li>
+						<dl>
+							<dt>品牌：</dt>
+							<dd class="ss">
+								<div class="s1">
+									<!--动态插入-->
+								</div>
+							</dd>
+						</dl>
+						<div class="option ">
+							<a class="sort-mul" href="javascript:;">
+								<span class="ico-add">+</span>
+								<span class="text-mul">多选</span>
+							</a>
+							<a class="sort-more" href="javascript:;" style="visibility: visible;">
+								<span class="ico-r-4-7"></span>
+								<span class="text-more">更多</span>
+							</a>
+						</div>
+					</li>
+					<li>
+						<dl>
+							<dt>价格：</dt>
+							<dd class="s3">
+								<div class="s2">
+									<!--动态插入-->
+								</div>
+							</dd>
+						</dl>
+						<div class="option ">
+							<a class="sort-mul" href="javascript:;">
+								<span class="ico-add">+</span>
+								<span class="text-mul">多选</span>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!--排序-->
+			<div class="sortbar">
+				<div class="sortinner">
+					<span class="pr10">排序：</span>
+					<a class="current" href="javascript:;">
+						默认
+						<span class="ico-sort-d ico-sort-dr"></span>
+					</a>
+					<a class="pr10 " href="javascript:;">
+						价格
+						<span class="ico-sort-ar">
+							<span class="up uu"></span>
+							<span class="down"></span>
+						</span>
+					</a>
+					<a href="javascript:;">
+						销量
+						<span class="ico-sort-d sd"></span>
+					</a>
+					<a href="javascript:;">
+						人气
+						<span class="ico-sort-d sd"></span>
+					</a>
+					<a href="javascript:;">
+						上架时间
+						<span class="ico-sort-d sd"></span>
+					</a>
+					<span class="stock">
+						<label>
+							<input type="checkbox" />只看有货							
+						</label>
+					</span>
+				</div>
+				<div class="sortpage">
+					<span class="p28">
+						共
+						<span class="rede1">3261</span>
+						个商品
+						<span class="line">｜</span>
+						<span class="rede1">1</span>
+						/82页
+					</span>
+						<a href="javascript:;" class="py">下一页</a>
+				</div>			
+			</div>
+			<!--商品列表-->
+			<div class="searchlist">
+				<ul>
+					<!--动态插入商品列表-->
+				</ul>				
+			</div>
+			<!--页数-->
+			<div class="pagination">
+				<div class="page">
+					<ul>
+						<li class="page-link current">1</li>
+						<li class="page-link">2</li>
+						<li class="page-link">3</li>
+						<li class="ellipsis">...</li>
+						<li class="page-link">82</li>
+					</ul>
+					<a class="next page-link" href="javascript:;">下一页</a>
+				</div>	
+			</div>
+		</div>
+		
+			
+		<!--bottom-->
+		<div class="_bottom"></div>
+		<script>
+			$("._bottom").load("html/bottom.html");
+		</script>	
+	</body>
+</html>

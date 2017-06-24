@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>购物车</title>
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="css/c-top.css" />
+		<link rel="stylesheet" href="css/cart.css" />
+		<link rel="stylesheet" href="css/bottom.css" />
+		<script src="js/jquery-1.11.3.js"></script>
+
+	</head>
+	<body>
+		<!--top-->
+		<div class="_top"></div>
+		<script>
+			$("._top").load("html/c-top.html");
+		</script>
+		
+		<!--内容区-->
+		<div class="da-cart ready">
+			<!--步骤-->
+			<div class="cart-top">
+				<a class="logo" href="index.html"></a>
+				<div class="cart-step">
+					<ul>
+						<li class="step-1 current">
+							<span class="triangle"></span>
+							<span class="icon-number">1</span>
+							查看购物车
+						</li>
+						<li class="step-2">
+							<span class="triangle"></span>
+							<span class="icon-number">2</span>
+							确认订单信息
+							<span class="icon-to"></span>
+						</li>
+						<li class="step-3">
+							<span class="triangle"></span>
+							<span class="icon-number">3</span>
+							成功提交订单
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--订单列表头-->
+			<div class="cart-table empty">
+				<div class="cart-thead">
+					<ul>
+						<li class="th th-check">
+							<label>
+								<input class="check" type="checkbox">
+								全选
+							</label>
+						</li>
+						<li class="th th-name"> 商品名称 </li>
+						<li class="th th-price"> 单价（元） </li>
+						<li class="th th-number"> 数量 </li>
+						<li class="th th-total"> 小计（元） </li>
+						<li class="th th-handle"> 操作 </li>
+					</ul>
+				</div>
+				<table class="data-empty" cellspacing="0" cellpadding="0">
+					<tbody>
+						<tr>
+							<td valign="middle" align="center">
+							<strong></strong>
+							<span>
+								购物车空空的哦~，去看看心仪的商品吧~
+								<br>
+								<a href="/">去购物></a>
+							</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>				
+			</div>	
+			<!--总计-->
+			<div class="">
+				<div class="total-box" style="margin-top: 0px;">
+					<label class="sel-all">
+						<input type="checkbox">全选
+					</label>
+					<div class="option">
+						<a href="javascript:;">删除选中的商品</a>
+						<a href="javascript:;">移到我的收藏</a>
+					</div>
+					<div class="toolbar">
+						<a class="btn-count" href="###">去结算</a>
+						<div class="total-count">
+							<p>
+								<span class="item">总金额：</span>
+								<span class="sumprice rede1">¥
+									<span class="f20">0.00</span>
+								</span>
+							</p>
+							<p>
+								<span class="item">已节省：</span>
+								-¥
+								<span data-bar-reduce="">0.00</span>
+							</p>
+						</div>
+						<div class="ammount">
+							已选中
+							<span class="rede1">0</span>
+							件商品
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--登录-->
+			<div class="cart-collection">
+				<div class="title">
+					<p>我的收藏</p>
+				</div>
+				<table class="data-empty1 data-empty2" cellspacing="0" cellpadding="0">
+					<tbody>
+						<tr>
+							<td>登陆后才能查看收藏的全球好货哦~</td>
+						</tr>
+						<tr>
+							<td align="center">
+							<a href="login.html" class="lh">登录></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+			</div>			
+			
+		</div>
+		<!--底部-->					
+		<div class="_bottom"></div>
+		<script>
+			$("._bottom").load("html/bottom.html");
+		</script>	
+	</body>
+</html>

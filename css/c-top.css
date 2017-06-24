@@ -1,0 +1,46 @@
+@charset "utf-8";
+/*top*/
+#top{background: #f2f2f2;border-bottom: 1px solid #dadada;width: auto;margin-bottom: 30px;z-index: 5;position: relative;}
+#top .t_con{height: 30px;margin:0 auto;width: 1200px;position:relative;}
+#top .t_con .aa{display:block;float:left;line-height: 30px;color:#666;font-size: 14px;}
+#top .t_con a:hover{color:#f00;text-decoration:underline; }
+.t_con .t_right{line-height: 32px;position: absolute;right: 40px;display: inline-block;height:32px;}
+.t_right .tip::before{content:"注册即得 新人专享优惠券";}
+.t_right .tip{background:#6a4084 none repeat scroll 0 0;border-radius: 3px;color:#fff;height:30px;padding:0 5px;position: absolute;top:25px;left:50px;z-index: 2;font-size: 12px;}
+.tip .t_close::before {color: #fff;content: "×";}
+.tip .t_close::after {border-bottom: 10px solid #6a4084;border-left: 5px solid transparent;border-right: 5px solid transparent;content: "";font-size: 0;left: 12px;position: absolute;top: -5px;}
+.tip .t_close {cursor: pointer;display: inline-block;height: 18px;margin-left: 4px;}
+.t_right .line{padding:0 6px;}
+.t_right .t_da{position: relative;}
+.t_da .da_code{background:#e5e5e5;border:1px solid #ececec;padding:15px;position:absolute;right:-20px;top:22px;width: 91px;z-index: 5;height:92px;display: none}
+.da_code .arr{border-color:transparent transparent #e5e5e5;border-style: solid;border-width:7px 5px;position: absolute;right:54px;top:-14px;}
+.da_code .pic{background: url(../img/wei.jpg) no-repeat 0 0;position: absolute;height:91px;width:91px;}
+.t_da:hover  .da_code,.pic{display: block;}
+.t_login,.t_register,.t_da,span{color:#666;font-size: 14px;}
+.phone{background:url(../img/phone.jpg) no-repeat;display: inline-block;margin-top: -2px;vertical-align: middle;height:13px;margin-left: 4px;margin-right: 4px;width: 13px;z-index: 2}
+/*左侧购物车*/
+.da-sidebar {background: #333;color: #fff;height: 100%;min-height: 480px;position: fixed;right: 0;text-align: center;top: 0;width: 40px;z-index: 150;}
+.s-function{float:left;width:40px;height:100%;position:relative;}
+.da-sidebar .sb-cart {margin-bottom: 22px;margin-top: 110px;padding: 0 0 10px;position: relative;}
+.da-sidebar .sidebar-btn {cursor: pointer;display: block;}
+.da-sidebar .cut-line{background:#515151;height:1px;margin:0 0 14px 9px;overflow: hidden;width:22px;}
+.da-sidebar .icon_cart{background:url("../img/nav/h1.jpg") no-repeat  6px center;display: block;height: 26px;margin-bottom: 10px;width: 33px;}
+.da-sidebar .name{line-height:16px;font-size: 12px;}
+.da-sidebar .i_num{background: #E34755;border-radius: 50%;color:#fff;display: inline-block;height:20px;width:20px;margin-top:7px;}
+.da-sidebar .money{height:37px;padding-top:5px;position:relative;cursor: pointer;display:block}
+.da-sidebar .prom{background: url("../img/nav/h2.jpg") no-repeat 15px center;display: block;height:22px;width:33px;margin-bottom: 10px;}
+.da-sidebar strong{height:42px;width:100px;position:absolute;right:40px;top:0;line-height: 42px;text-align: center;background:#666;font-weight: 700;font-size:14px;display: none;}
+.da-sidebar .sb-coll{height:39px;padding-top:7px;position:relative;cursor: pointer;display:block}
+.sb-coll .love{display: block;height:25px;width:32px;margin-bottom: 8px;background: url("../img/nav/h3.jpg") no-repeat 10px center;}
+.money:hover .sym1{display: block;}
+.sb-cart:hover,.money:hover,.sb-coll:hover{background:#E34755}
+.sb-coll:hover .sym2{display: block;}
+.sb-cart:hover .icon_cart{background:url("../img/nav/h11.jpg") no-repeat  6px center;}
+.money:hover .prom{background: url("../img/nav/h12.jpg") no-repeat 15px center;}
+.sb-coll:hover .love{background: url("../img/nav/h13.jpg") no-repeat 10px center;}
+.da-sidebar .load{background:url("../img/nav/h4.jpg")no-repeat center;position:absolute;bottom: 58px;left:0;height:22px;width:31px;}
+.da-sidebar .q-pop{background-color: #fff;border-color: #e5e5e5 currentcolor #e5e5e5 #e5e5e5;border-image: none;border-style: solid none solid solid;border-width: 1px 0 1px 1px;bottom: -8px;color: #000;display: block;height: 138px;left: -110px;position: absolute;text-align: center;width: 109px;}
+.da-sidebar .q-arrow {border-color: transparent transparent transparent #fff;border-style: solid;border-width: 5px 6px;bottom: 14px;position: absolute;right: -12px;}
+.da-sidebar .q-img {background: url("../img/wei.jpg") no-repeat 0 0;display: block;height: 91px;margin: 10px auto;width: 91px;}
+.q-pop p{font-size: 12px;}
+.da-sidebar .goTop {bottom: 10px;display: block;height: 30px;overflow: hidden;position: absolute;right: 5px;width: 30px;}

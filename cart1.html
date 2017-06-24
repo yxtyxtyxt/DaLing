@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="css/cart1.css" />
+<link rel="stylesheet" href="css/common.css" />
+<link rel="stylesheet" href="css/l-top.css" />
+<link rel="stylesheet" href="css/bottom.css" />
+<script src="js/jquery-1.11.3.js" ></script>
+<script src="js/cookie.js"></script>
+
+<script>
+$(function(){
+	// 显示商品列表
+	$.get("json/list1.json", function(str){
+		// 解决兼容问题
+		var obj;
+		if( typeof str == "string" ){
+			obj = JSON.parse(str);
+		}else{
+			obj = str;
+		}
+		// 获取商品列表
+		var arr = obj.list;
+		var l = arr.length;
+		// 循环
+		var ul = $(".list>ul");
+		for( var i=0; i<l; i++ ){
+			var goods = arr[i];	//获得商品对象
+			// 创建li
+			var li = $("<li></li>");
+			ul.append(li);
+			li.attr("goods", JSON.stringify(goods));
+			// 添加商品
+			var img = $("<img />");
+			img.attr("src", "images/"+goods.img);
+			li.append(img);
+			// 添加商品标题
+			var h4 = $("<h4></h4>");
+			h4.html( goods.title );
+			li.append(h4);
+			// 单价
+			var span = $("<span></span>");
+			span.html( "价格：￥"+goods.price );
+			li.append(span);
+			// 添加到购物车
+			var a = $("<a>添加到购物车</a>");
+			li.append( a );
+			//a[0].goods = goods;						//js的写法
+			//a.attr("goods", JSON.stringify(goods));	//jq的写法
+			a.click( function(){
+				//console.log( this.goods );	// js的写法
+				//console.log( JSON.parse($(this).attr("goods")) ) ; //jq的写法
+				// 找到商品
+				var goodstr = $(this).parent().attr("goods");
+				//console.log($(this).parent());  //li
+				//console.log(goodstr);  {"id":"2","time":"2017/5/24 15:1:31","title":"香蕉","content":"香蕉","img":"2.jpg","price":2,"type":"0","imgs":[]}
+				//console.log(typeof goodstr);  //string
+				var goods = JSON.parse(goodstr) ;
+				//console.log(goods);
+				//{id: "2", time: "2017/5/24 15:1:31", title: "香蕉", content: "香蕉", img: "2.jpg"…}
+				//console.log(typeof goods); //object
+				// 让商品飞起来
+				var imgOffset = $(this).siblings("img").offset();//原始图片的偏移量
+				var toolsOffset = $(".tools").offset();	//侧边栏的偏移量
+				var img = $("<img />"); //临时图片
+				$("body").append(img);
+				img.attr("src", "images/"+goods.img).addClass("fly").css({					
+					"left" : imgOffset.left,
+					"top" : imgOffset.top
+				}).animate({
+					"left" : toolsOffset.left+5,
+					"top" : toolsOffset.top+5,
+					"width" : 40,
+					"height" : 40
+				}, function(){
+					img.remove();//删除节点		
+					// 当前添加的商品如果是第一次添加，则数量为1；否则数量+1；
+					// 如果能够根据名称获取出cookie，则表示之前添加过该商品
+					var str = getCookie("g"+goods.id);
+					var num;
+					if( str=="" ){
+						num = 1;	// 如果之前没添加过该商品，则数量是1
+					}else{
+						num = JSON.parse(str).num + 1;	// 如果之前添加过该商品，则数量+1
+					}
+					goods["num"] = num;	// 该商品对象中，添加一个num属性，其值为num
+					setCookie("g"+goods.id, JSON.stringify(goods), 10);// 存储到cookie
+					showCart();//显示购物车内容
+				});
+				
+				
+			} );
+		}
+		
+	});
+	
+	showCart();
+	// 显示购物车中的商品
+	function showCart(){
+		var ol = $(".tools>ol");
+		ol.html("");
+		var allNum = 0;
+		// 从cookie中获取商品数据
+		var arr = document.cookie.split("; ");
+		var l = arr.length;
+		for( var i=0; i<l; i++ ){
+			var col = arr[i].split("=");
+			// 如果符合该条件，认为该cookie是购物车商品cookie
+			if( /g\d+/.test(col[0]) ){				
+				// 将cookie内容先解码，在转义为json对象
+				var goodstr = decodeURIComponent(col[1]);
+				var goods = JSON.parse(goodstr);
+				//allNum++;
+				allNum += Number(goods.num);
+				// 创建li(用于承载商品信息的舞台)
+				var li = $("<li></li>");
+				ol.append(li);
+				li.attr("goods", goodstr);	// 自定义属性，存储该商品所有的信息
+				// 图片
+				var img = $("<img />");
+				img.attr("src", "images/"+goods.img);
+				li.append(img);
+				// 标题
+				var h4 = $("<h4></h4>");
+				h4.html(goods.title);
+				li.append(h4);
+				// 数量
+				var divNum = $("<div></div>");
+				li.append(divNum);
+				// 减法
+				var input1 = $("<input />");
+				input1.attr({
+					"type":"button",
+					"value":"-"
+				}).click(function(){
+					//console.log($(this).parent());
+					//父元素是divNum 再父是li
+					var li = $(this).parent().parent();//由当前的减号按钮，找到li元素
+					var goods = JSON.parse(li.attr("goods"));//在li元素上，找到商品所有属性信息
+					var inp = $(this).siblings("input:eq(0)");//找到输入框元素
+					var n = inp.val()-1;
+					if( n <= 0 ){
+						// 删除cookie   并且      在购物车栏中删除商品
+						setCookie("g"+goods.id, "", -10);
+						li.remove();
+					}else{
+						// 更新cookie  
+						goods["num"] = n;
+						setCookie("g"+goods.id, JSON.stringify(goods), 10);
+						inp.val(n);
+						// 将li自定义属性中的值更新
+						li.attr("goods", JSON.stringify(goods));
+						// 更新总价
+						li.children("p").html("总价：￥"+(goods.price*goods.num));
+						// 总数量更新
+						$(".tools>ul>li").html(--allNum);
+					}
+				});
+				divNum.append(input1);
+				// 输入
+				var input2 = $("<input />");
+				input2.attr({
+					"type":"text",
+					"value":goods.num
+				}).blur(function(){
+					var li = $(this).parent().parent();//由当前的输入框，找到li元素
+					var goods = JSON.parse(li.attr("goods"));//在li元素上，找到商品所有属性信息
+					var inp = $(this);//找到输入框元素
+					var n = inp.val();					
+					var tmp = n - goods.num;// 当前值 减去 原始值	
+					allNum += tmp;//更新总数量
+					$(".tools>ul>li").html(allNum);//更新总数量
+					if( n <= 0 ){
+						// 删除cookie   并且      在购物车栏中删除商品
+						setCookie("g"+goods.id, "", -10);
+						li.remove();
+					}else{
+						// 更新cookie  
+						goods["num"] = n;
+						setCookie("g"+goods.id, JSON.stringify(goods), 10);
+						// 将li自定义属性中的值更新
+						li.attr("goods", JSON.stringify(goods));
+						// 更新总价
+						li.children("p").html("总价：￥"+(goods.price*goods.num));
+					}
+				});
+				divNum.append(input2);
+				// 加法
+				var input3 = $("<input />");
+				input3.attr({
+					"type":"button",
+					"value":"+"
+				}).click(function(){
+					var li = $(this).parent().parent();//由当前的加号按钮，找到li元素
+					var goods = JSON.parse(li.attr("goods"));//在li元素上，找到商品所有属性信息
+					var inp = $(this).siblings("input:eq(1)");//找到输入框元素
+					var n = Number(inp.val())+1;				
+					// 更新cookie  
+					goods["num"] = n;
+					setCookie("g"+goods.id, JSON.stringify(goods), 10);
+					inp.val(n);	
+					// 将li自定义属性中的值更新
+					li.attr("goods", JSON.stringify(goods));
+					// 更新总价
+					li.children("p").html("总价：￥"+(goods.price*goods.num));
+					// 总数量更新
+					$(".tools>ul>li").html(++allNum);
+				});
+				divNum.append(input3);
+				// 单价
+				var price = $("<span></span>");
+				price.html("单价：￥"+goods.price);
+				li.append(price);
+				// 总价
+				var allPrice = $("<p></p>");
+				allPrice.html("总价：￥"+(goods.price*goods.num));
+				li.append(allPrice);
+			}
+		}
+		// 总数量更新
+		$(".tools>ul>li").html(allNum);
+	}
+	
+	// 显示及隐藏侧边栏
+	$(".tools").mouseover(function(){
+		$(".tools>ol").stop().animate({
+			"right" : 50
+		})
+	}).mouseout(function(){
+		$(".tools>ol").stop().animate({
+			"right" : -250
+		})
+	})
+	
+	$(".tools>ul>li").click(function(){
+		location.href = "cart.html";
+	})
+});
+</script>
+</head>
+<body>
+<!--top-->
+<div class="_top"></div>
+<script>
+	$("._top").load("html/g-top.html");
+</script>		
+<div class="box">
+	<div class="list">
+		<ul></ul>
+	</div>
+	
+	<div class="tools">
+		<ol>
+		</ol>
+		<ul>
+			<li>1</li>
+		</ul>	
+	</div>
+</div>
+<div class="_bottom"></div>
+<script>
+	$("._bottom").load("html/bottom.html");
+</script>	
+</body>
+</html>
